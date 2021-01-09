@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<context:component-scan base-package="spring_di.pac.ui, spring_di.pac.entity"/>
+	
+	<!-- Exam exam = new MyExam(); -->
+	<bean id="exam" class="spring_di.pac.entity.MyExam">
+	<!-- <constructor-arg index="0" value = "10"/>
+		<constructor-arg index="1" value = "20"/>
+		<constructor-arg index="2" value = "30"/>
+		<constructor-arg index="3" value = "40"/>
+	</bean> -->
+	
+	
+	<!-- <context:annotation-config/>
+	<bean id="exam" class="spring_di.pac.entity.MyExam" p:kor="10" p:eng="20" p:math="30" p:com="40"/>
+	<bean id="console" class="spring_di.pac.ui.InlineExamConsole">
+		console.setExam(exam);
+		<property name="exam" ref="exam"/>
+	</bean> -->
+	
+	
+	<!-- List<Exam> exams = new ArrayList<>(); -->
+	<!-- <bean id="exams" class="java.util.ArrayList">
+		<constructor-arg>
+			<list>
+				<bean class="spring_di.pac.entity.MyExam" p:kor="1" p:eng="2" p:math="3" p:com="4"/>
+				<ref bean="exam"/>
+			</list>
+		</constructor-arg>
+	</bean> -->
+	
+	
+	<!-- <util:list id="exams" list-class="java.util.ArrayList">
+		<bean class="spring_di.pac.entity.MyExam" p:kor="1" p:eng="2" p:math="3" p:com="4"/>
+		<ref bean="exam"/>
+	</util:list> -->
+	
+	
+</beans>
