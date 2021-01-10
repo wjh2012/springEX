@@ -11,8 +11,8 @@
 	<context:component-scan base-package="spring_di.pac.ui, spring_di.pac.entity"/>
 	
 	<!-- Exam exam = new MyExam(); -->
-	<bean id="exam" class="spring_di.pac.entity.MyExam">
-	<!-- <constructor-arg index="0" value = "10"/>
+	<bean id="exam" class="spring_di.pac.entity.MyExam"/>
+	 <!--<constructor-arg index="0" value = "10"/>
 		<constructor-arg index="1" value = "20"/>
 		<constructor-arg index="2" value = "30"/>
 		<constructor-arg index="3" value = "40"/>

@@ -1,13 +1,8 @@
 package spring_di.pac;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import spring_di.pac.entity.Exam;
-import spring_di.pac.entity.MyExam;
 import spring_di.pac.ui.ExamConsole;
 
 public class Program {
@@ -21,8 +16,16 @@ public class Program {
 		console.setExam(exam);
 		*/
 		
+		
+		/*
 		ApplicationContext context =
 				new  ClassPathXmlApplicationContext("spring_di/pac/setting.xml");
+		*/
+		
+		
+		ApplicationContext context =
+				new AnnotationConfigApplicationContext(MyAppConfig.class);
+		
 		
 		//Exam exam = context.getBean(Exam.class);
 		//System.out.println(exam.toString());

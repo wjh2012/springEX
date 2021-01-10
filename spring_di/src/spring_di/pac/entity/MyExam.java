@@ -3,7 +3,7 @@ package spring_di.pac.entity;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("exam2")
+
 public class MyExam implements Exam {
 	
 	@Value("10")

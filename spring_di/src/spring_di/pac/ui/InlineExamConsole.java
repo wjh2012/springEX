@@ -9,7 +9,7 @@ import spring_di.pac.entity.Exam;
 public class InlineExamConsole implements ExamConsole {
 	
 	@Autowired(required=true)
-	@Qualifier("exam2")
+	//@Qualifier("exam2")
 	private Exam exam;
 	
 	public InlineExamConsole() {
@@ -17,13 +17,16 @@ public class InlineExamConsole implements ExamConsole {
 	}
 		
 	public InlineExamConsole(Exam exam) {
-		System.out.println("New constructor");
+		System.out.println("overload constructor");
 		this.exam = exam;
 	}
 
 	@Override
 	public void print() {
-		System.out.printf("total is %d, avg is %f\n",exam.total(), exam.avg());
+		if(exam == null)
+			System.out.printf("total is %d, avg is %f\n",0, 0.0);
+		else
+			System.out.printf("total is %d, avg is %f\n",exam.total(), exam.avg());
 	}
 	
 	
