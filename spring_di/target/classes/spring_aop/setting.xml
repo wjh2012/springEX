@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+	<!-- 주 업무 로직 -->
+	<!-- Exam exam = new MyExam(1,1,1,1); -->
+	<bean id="target" class="spring_aop.entity.MyExam" p:kor="1" p:eng="1" p:math="1" p:com="1"/>
+	
+	<!-- Around -->
+	<bean id="logAroundAdvice" class="spring_aop.advice.LogAroundAdvice"/>
+	<!-- Before -->
+	<bean id="logBeforeAdvice" class="spring_aop.advice.LogBeforeAdvice"/>
+	<!-- AfterReturning -->
+	<bean id="logAfterReturningAdvice" class="spring_aop.advice.LogAfterReturningAdvice"/>
+	<!-- Throwing -->
+	<bean id="logAfterThrowingAdvice" class="spring_aop.advice.LogAfterThrowingAdvice"/>
+	
+	
+	<!--
+	포인트컷
+	<bean id="classicPointCut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		토탈만 포인트 컷
+		<property name="mappedName" value="total"/>
+	</bean>
+	
+	포인트컷과 device를 결합하기 위함
+	<bean id = "classicBeforeAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		setAdvice
+		<property name="advice" ref="logBeforeAdvice"/>
+		<property name="pointcut" ref="classicPointCut"/>
+	</bean>	
+	
+	Around
+	<bean id = "classicAroundAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="advice" ref="logAroundAdvice"/>
+		<property name="pointcut" ref="classicPointCut"/>
+	</bean>
+	-->
+		
+	<!-- 
+	<bean id = "classicBeforeAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		setAdvice
+		<property name="advice" ref="logBeforeAdvice"/>
+		<property name="mappedNames">
+			<list>
+			 	<value>total</value>
+			 	<value>avg</value>
+			</list>
+		</property>
+	</bean>
+	 -->
+	
+	
+	<bean id = "classicBeforeAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<!-- setAdvice -->
+		<property name="advice" ref="logBeforeAdvice"/>
+		<property name="mappedNames">
+			<list>
+			 	<value>.*to.*</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id = "classicAroundAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="logAroundAdvice"/>
+		<property name="mappedName" value="total"/>
+	</bean>
+	
+	<!-- 결합 -->
+	<bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<!-- setTarget -->
+		<property name="target" ref="target"/>
+		<property name="interceptorNames">
+			<list>
+				<value>classicAroundAdvisor</value>
+				<value>classicBeforeAdvisor</value>
+				<value>logAfterReturningAdvice</value>
+				<value>logAfterThrowingAdvice</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+</beans>
